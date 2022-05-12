@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EFSample.Data.Data;
 using EFSample.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EFSampleWeb.Controllers
 {
+    [Authorize]
     public class ItemsController : Controller
     {
         private readonly EfsampleDatabaseContext _context;

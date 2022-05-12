@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using EFSample.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace EFSample.Data.Data
 {
-    public partial class EfsampleDatabaseContext : DbContext
+    public partial class EfsampleDatabaseContext : IdentityDbContext<IdentityUser>
     {
         public EfsampleDatabaseContext()
         {
@@ -28,8 +30,14 @@ namespace EFSample.Data.Data
                 optionsBuilder.UseSqlServer("Server=ALPHA\\SQLEXPRESS;Database=ItemDB;Trusted_Connection=True");
             }
         }
+        
+        //commands to update database
+        //drop the existing tables
+        //Add-Migration AddIdentity
+        //Update-Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.HasAnnotation("Scaffolding:ConnectionString", "Data Source=(local);Initial Catalog=EFSample.Database;Integrated Security=true");
 
             modelBuilder.Entity<Item>(entity =>
